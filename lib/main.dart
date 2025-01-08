@@ -5,11 +5,14 @@ import 'package:softwarica_student_management_bloc/core/network/hive_service.dar
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // Initialize Hive Database
   await HiveService.init();
+
+  // Delete all the hive data and boxes
+  // await HiveService().clearAll();
   // Initialize Dependencies
   await initDependencies();
+
   runApp(
     App(),
   );

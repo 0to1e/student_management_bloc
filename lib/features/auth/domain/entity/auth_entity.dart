@@ -4,8 +4,8 @@ import 'package:softwarica_student_management_bloc/features/course/domain/entity
 
 class AuthEntity extends Equatable {
   final String? userId;
-  final String fname;
-  final String lname;
+  final String fName;
+  final String lName;
   final String? image;
   final BatchEntity batch;
   final List<CourseEntity> courses;
@@ -14,8 +14,8 @@ class AuthEntity extends Equatable {
 
   const AuthEntity({
     this.userId,
-    required this.fname,
-    required this.lname,
+    required this.fName,
+    required this.lName,
     this.image,
     required this.batch,
     required this.courses,
@@ -25,5 +25,5 @@ class AuthEntity extends Equatable {
 
   @override
   List<Object?> get props =>
-      [userId, fname, lname, image, batch, courses, username, password];
+      [userId, fName, lName, image, batch, courses, username, password];
 }

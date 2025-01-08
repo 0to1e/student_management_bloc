@@ -31,9 +31,5 @@ class BatchState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        batches,
-        isLoading,
-        error,
-      ];
+  List<Object?> get props => [batches, isLoading, error];
 }

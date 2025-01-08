@@ -39,13 +39,20 @@ class BatchHiveModel extends Equatable {
     );
   }
 
-  // To Entity List
-  static List<BatchHiveModel> fromEntityList(List<BatchEntity> entityList) {
-    return entityList
-        .map((entity) => BatchHiveModel.fromEntity(entity))
-        .toList();
-  }
-
   @override
   List<Object?> get props => [batchId, batchName];
 }
+
+
+
+  // // // From Entity List
+  // // static List<BatchHiveModel> fromEntityList(List<BatchEntity> entityList) {
+  // //   return entityList
+  // //       .map((entity) => BatchHiveModel.fromEntity(entity))
+  // //       .toList();
+  // // }
+
+  // // To Entity List
+  // static List<BatchEntity> toEntityList(List<BatchHiveModel> hiveList) {
+  //   return hiveList.map((hive) => hive.toEntity()).toList();
+  // }

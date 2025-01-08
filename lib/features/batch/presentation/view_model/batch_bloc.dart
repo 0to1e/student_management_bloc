@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:softwarica_student_management_bloc/features/batch/domain/entity/batch_entity.dart';
 import 'package:softwarica_student_management_bloc/features/batch/domain/use_case/create_batch_usecase.dart';
 import 'package:softwarica_student_management_bloc/features/batch/domain/use_case/delete_batch_usecase.dart';
@@ -24,7 +25,6 @@ class BatchBloc extends Bloc<BatchEvent, BatchState> {
     on<LoadBatches>(_onLoadBatches);
     on<AddBatch>(_onAddBatch);
     on<DeleteBatch>(_onDeleteBatch);
-    on<GetBatches>(_onGetBatches);
 
     // Call this event whenever the bloc is created
     add(LoadBatches());
@@ -50,6 +50,7 @@ class BatchBloc extends Bloc<BatchEvent, BatchState> {
           emit(state.copyWith(isLoading: false, error: failure.message)),
       (batches) {
         emit(state.copyWith(isLoading: false, error: null));
+
         add(LoadBatches());
       },
     );
@@ -67,16 +68,6 @@ class BatchBloc extends Bloc<BatchEvent, BatchState> {
         emit(state.copyWith(isLoading: false, error: null));
         add(LoadBatches());
       },
-    );
-  }
-
-  Future<void> _onGetBatches(GetBatches event, Emitter<BatchState> emit) async {
-    emit(state.copyWith(isLoading: true));
-    final result = await _getAllBatchUseCase.call();
-    result.fold(
-      (failure) =>
-          emit(state.copyWith(isLoading: false, error: failure.message)),
-      (batches) => emit(state.copyWith(isLoading: false, batches: batches)),
     );
   }
 }

@@ -13,9 +13,9 @@ class AuthHiveModel extends Equatable {
   @HiveField(0)
   final String? studentId;
   @HiveField(1)
-  final String fname;
+  final String fName;
   @HiveField(2)
-  final String lname;
+  final String lName;
   @HiveField(3)
   final String? image;
   @HiveField(4)
@@ -29,8 +29,8 @@ class AuthHiveModel extends Equatable {
 
   AuthHiveModel({
     String? studentId,
-    required this.fname,
-    required this.lname,
+    required this.fName,
+    required this.lName,
     this.image,
     required this.batch,
     required this.courses,
@@ -41,8 +41,8 @@ class AuthHiveModel extends Equatable {
   // Initial Constructor
   const AuthHiveModel.initial()
       : studentId = '',
-        fname = '',
-        lname = '',
+        fName = '',
+        lName = '',
         image = '',
         batch = const BatchHiveModel.initial(),
         courses = const [],
@@ -53,8 +53,8 @@ class AuthHiveModel extends Equatable {
   factory AuthHiveModel.fromEntity(AuthEntity entity) {
     return AuthHiveModel(
       studentId: entity.userId,
-      fname: entity.fname,
-      lname: entity.lname,
+      fName: entity.fName,
+      lName: entity.lName,
       image: entity.image,
       batch: BatchHiveModel.fromEntity(entity.batch),
       courses: CourseHiveModel.fromEntityList(entity.courses),
@@ -67,8 +67,8 @@ class AuthHiveModel extends Equatable {
   AuthEntity toEntity() {
     return AuthEntity(
       userId: studentId,
-      fname: fname,
-      lname: lname,
+      fName: fName,
+      lName: lName,
       image: image,
       batch: batch.toEntity(),
       courses: CourseHiveModel.toEntityList(courses),
@@ -79,7 +79,5 @@ class AuthHiveModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [studentId, fname, lname, image, batch, courses, username, password];
+      [studentId, fName, lName, image, batch, courses, username, password];
 }
-
-

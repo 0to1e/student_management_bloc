@@ -1,5 +1,6 @@
 part of 'batch_bloc.dart';
 
+@immutable
 sealed class BatchEvent extends Equatable {
   const BatchEvent();
 
@@ -8,8 +9,6 @@ sealed class BatchEvent extends Equatable {
 }
 
 final class LoadBatches extends BatchEvent {}
-
-final class GetBatches extends BatchEvent {}
 
 final class AddBatch extends BatchEvent {
   final String batchName;
@@ -27,3 +26,5 @@ final class DeleteBatch extends BatchEvent {
   @override
   List<Object> get props => [batchId];
 }
+
+

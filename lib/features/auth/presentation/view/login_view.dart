@@ -25,23 +25,12 @@ class LoginView extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: Column(
                   children: [
-                    // const Text(
-                    //   'Login',
-                    //   style: TextStyle(
-                    //     fontSize: 30,
-                    //     fontFamily: 'Brand Bold',
-                    //   ),
-                    // ),
-                    BlocBuilder<LoginBloc, LoginState>(
-                      builder: (context, state) {
-                        return Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontFamily: 'Brand Bold',
-                          ),
-                        );
-                      },
+                    const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'Brand Bold',
+                      ),
                     ),
                     _gap,
                     TextFormField(
@@ -79,13 +68,6 @@ class LoginView extends StatelessWidget {
                         if (_formKey.currentState!.validate()) {
                           if (_usernameController.text == 'kiran' &&
                               _passwordController.text == 'kiran123') {
-                            // context.read<LoginBloc>().add(
-                            //       LoginStudentEvent(
-                            //         email: _usernameController.text,
-                            //         password: _passwordController.text,
-                            //       ),
-                            //     );
-
                             context.read<LoginBloc>().add(
                                   NavigateHomeScreenEvent(
                                     destination: HomeView(),
@@ -119,7 +101,7 @@ class LoginView extends StatelessWidget {
                       key: const ValueKey('registerButton'),
                       onPressed: () {
                         context.read<LoginBloc>().add(
-                              NavigateHomeScreenEvent(
+                              NavigateRegisterScreenEvent(
                                 destination: RegisterView(),
                                 context: context,
                               ),

@@ -31,8 +31,10 @@ class HiveService {
   }
 
   Future<List<BatchHiveModel>> getAllBatches() async {
+    // Sort by BatchName
     var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
-    return box.values.toList();
+    return box.values.toList()
+      ..sort((a, b) => a.batchName.compareTo(b.batchName));
   }
 
   // Course Queries
@@ -52,7 +54,7 @@ class HiveService {
   }
 
   // Auth Queries
-  Future<void> addAuth(AuthHiveModel auth) async {
+  Future<void> register(AuthHiveModel auth) async {
     var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
     await box.put(auth.studentId, auth);
   }
