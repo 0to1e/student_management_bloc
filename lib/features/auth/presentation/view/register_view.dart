@@ -232,7 +232,20 @@ class _RegisterViewState extends State<RegisterView> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (_key.currentState!.validate()) {}
+                        if (_key.currentState!.validate()) {
+                          context.read<RegisterBloc>().add(
+                                RegisterStudent(
+                                  context: context,
+                                  fName: _fnameController.text,
+                                  lName: _lnameController.text,
+                                  phone: _phoneController.text,
+                                  batch: _dropDownValue!,
+                                  courses: _lstCourseSelected,
+                                  username: _usernameController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
+                        }
                       },
                       child: const Text('Register'),
                     ),

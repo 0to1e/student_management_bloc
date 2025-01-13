@@ -19,6 +19,7 @@ class AuthLocalDataSource implements IAuthDataSource {
       fName: "",
       lName: "",
       image: null,
+      phone: "",
       batch: BatchEntity(batchName: ""),
       courses: [],
       username: "",
@@ -51,7 +52,6 @@ class AuthLocalDataSource implements IAuthDataSource {
 
   @override
   Future<String> uploadProfilePicture(File file) {
-    // TODO: implement uploadProfilePicture
     throw UnimplementedError();
   }
 }

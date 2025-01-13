@@ -1,5 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:softwarica_student_management_bloc/core/network/hive_service.dart';
+import 'package:softwarica_student_management_bloc/features/auth/data/data_source/local_data_source/auth_local_datasource.dart';
+import 'package:softwarica_student_management_bloc/features/auth/data/repository/auth_local_repository/auth_local_repository.dart';
+import 'package:softwarica_student_management_bloc/features/auth/domain/use_case/register_user_usecase.dart';
 import 'package:softwarica_student_management_bloc/features/auth/presentation/view_model/login/login_bloc.dart';
 import 'package:softwarica_student_management_bloc/features/auth/presentation/view_model/signup/register_bloc.dart';
 import 'package:softwarica_student_management_bloc/features/batch/data/data_source/batch_local_data_source.dart';
@@ -28,11 +31,39 @@ Future<void> initDependencies() async {
   await _initHomeDependencies();
   await _initRegisterDependencies();
   await _initLoginDependencies();
+
   await _initSplashScreenDependencies();
 }
 
 _initHiveService() {
   getIt.registerLazySingleton<HiveService>(() => HiveService());
+}
+
+_initRegisterDependencies() {
+  // init local data source
+  getIt.registerLazySingleton(
+    () => AuthLocalDataSource(getIt<HiveService>()),
+  );
+
+  // init local repository
+  getIt.registerLazySingleton(
+    () => AuthLocalRepository(getIt<AuthLocalDataSource>()),
+  );
+
+  // register use usecase
+  getIt.registerLazySingleton<RegisterUseCase>(
+    () => RegisterUseCase(
+      getIt<AuthLocalRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<RegisterBloc>(
+    () => RegisterBloc(
+      batchBloc: getIt<BatchBloc>(),
+      courseBloc: getIt<CourseBloc>(),
+      registerUseCase: getIt(),
+    ),
+  );
 }
 
 _initCourseDependencies() {
@@ -110,15 +141,6 @@ _initBatchDependencies() async {
 _initHomeDependencies() async {
   getIt.registerFactory<HomeCubit>(
     () => HomeCubit(),
-  );
-}
-
-_initRegisterDependencies() async {
-  getIt.registerFactory<RegisterBloc>(
-    () => RegisterBloc(
-      batchBloc: getIt<BatchBloc>(),
-      courseBloc: getIt<CourseBloc>(),
-    ),
   );
 }
 

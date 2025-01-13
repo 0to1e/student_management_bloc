@@ -52,6 +52,26 @@ class HiveService {
     var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
     return box.values.toList();
   }
+/*
+  register box
+  {
+    fname : "asd",
+    lname : "asd",
+    batch : {batchId : 1, batchName : "Batch 1"},
+    courses : [{courseId : 1, courseName : "Course 1"}, {courseId : 2, courseName : "Course 2"}],
+  }
+*/
+
+// OR
+
+/*
+ {
+    fname : "asd",
+    lname : "asd",
+    batch : 1,
+    courses : [1,3,4],
+  }
+*/
 
   // Auth Queries
   Future<void> register(AuthHiveModel auth) async {
@@ -82,6 +102,11 @@ class HiveService {
   Future<void> clearAll() async {
     await Hive.deleteBoxFromDisk(HiveTableConstant.batchBox);
     await Hive.deleteBoxFromDisk(HiveTableConstant.courseBox);
+    await Hive.deleteBoxFromDisk(HiveTableConstant.studentBox);
+  }
+
+  // Clear Student Box
+  Future<void> clearStudentBox() async {
     await Hive.deleteBoxFromDisk(HiveTableConstant.studentBox);
   }
 

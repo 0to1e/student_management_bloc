@@ -8,9 +8,10 @@ void main() async {
   // Initialize Hive Database
   await HiveService.init();
 
-  // Delete all the hive data and boxes
-  // await HiveService().clearAll();
   // Initialize Dependencies
+
+  // await HiveService().clearStudentBox();
+
   await initDependencies();
 
   runApp(

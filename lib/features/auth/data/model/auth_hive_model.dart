@@ -19,12 +19,14 @@ class AuthHiveModel extends Equatable {
   @HiveField(3)
   final String? image;
   @HiveField(4)
-  final BatchHiveModel batch;
+  final String phone;
   @HiveField(5)
-  final List<CourseHiveModel> courses;
+  final BatchHiveModel batch;
   @HiveField(6)
-  final String username;
+  final List<CourseHiveModel> courses;
   @HiveField(7)
+  final String username;
+  @HiveField(8)
   final String password;
 
   AuthHiveModel({
@@ -32,6 +34,7 @@ class AuthHiveModel extends Equatable {
     required this.fName,
     required this.lName,
     this.image,
+    required this.phone,
     required this.batch,
     required this.courses,
     required this.username,
@@ -44,6 +47,7 @@ class AuthHiveModel extends Equatable {
         fName = '',
         lName = '',
         image = '',
+        phone = '',
         batch = const BatchHiveModel.initial(),
         courses = const [],
         username = '',
@@ -56,6 +60,7 @@ class AuthHiveModel extends Equatable {
       fName: entity.fName,
       lName: entity.lName,
       image: entity.image,
+      phone: entity.phone,
       batch: BatchHiveModel.fromEntity(entity.batch),
       courses: CourseHiveModel.fromEntityList(entity.courses),
       username: entity.username,
@@ -70,6 +75,7 @@ class AuthHiveModel extends Equatable {
       fName: fName,
       lName: lName,
       image: image,
+      phone: phone,
       batch: batch.toEntity(),
       courses: CourseHiveModel.toEntityList(courses),
       username: username,
