@@ -52,6 +52,7 @@ class HiveService {
     var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
     return box.values.toList();
   }
+
 /*
   register box
   {
@@ -91,12 +92,18 @@ class HiveService {
 
   // Login using username and password
   Future<AuthHiveModel?> login(String username, String password) async {
+    // var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
+    // var auth = box.values.firstWhere(
+    //     (element) =>
+    //         element.username == username && element.password == password,
+    //     orElse: () => AuthHiveModel.initial());
+    // return auth;
+
     var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
-    var auth = box.values.firstWhere(
-        (element) =>
-            element.username == username && element.password == password,
-        orElse: () => AuthHiveModel.initial());
-    return auth;
+    var student = box.values.firstWhere((element) =>
+        element.username == username && element.password == password);
+    box.close();
+    return student;
   }
 
   Future<void> clearAll() async {
